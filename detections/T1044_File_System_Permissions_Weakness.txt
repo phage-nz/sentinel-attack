@@ -16,4 +16,4 @@
 Sysmon
 | where EventID == 7 and (module_loaded contains "\\Temp\\"
 or module_loaded contains "C:\\Users\\"
-or driver_signature_status !contains "Valid")
+or module_signature_status !contains "Valid")
