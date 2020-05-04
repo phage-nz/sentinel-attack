@@ -1,15 +1,3 @@
-// KQL Sysmon Event Parser compatible with OSSEM
-// Date: February 08, 2020
-// Original work by the Azure Sentinel team
-// Maintained by Edoardo Gerosa
-// Mapping to OSSEM by Olaf Hartong
-// OSSEM link > https://github.com/Cyb3rWard0g/OSSEM
-//
-// Notes:
-// 1. This parser works against the current version of events from Sysmon, it may need updates if Sysmon is updated.
-// 2. technique_id, technique_name and phase_name will only be parsed/available if deployed via the custom XML provided in this repository
-// 3. To parse dns events, make sure to use sysmon v10 with custom XML provided in this repository
-
 let timeframe = "{time_range}";
 let EventData = Event
 | where Source == "Microsoft-Windows-Sysmon"
@@ -245,9 +233,20 @@ dns_query_name = EventDetail.[4].["#text"],dns_query_status = EventDetail.[5].["
 ;
 processEvents;
 };
+let SysmonEvent23_FileDeleteEvents=() {
+let processEvents = EventData
+| where EventID == 23
+| extend rule_name = EventDetail.[0].["#text"], event_creation_time = EventDetail.[1].["#text"], process_guid = EventDetail.[2].["#text"], process_id = EventDetail.[3].["#text"],
+user_name = EventDetail.[4].["#text"], process_path = EventDetail.[5].["#text"], file_name = EventDetail.[6].["#text"], Hashes = EventDetail.[7].["#text"], is_executable = EventDetail.[8].["#text"], is_archived = EventDetail.[9].["#text"]
+| parse rule_name with * 'technique_id=' technique_id ',' * 'technique_name=' technique_name ',' * 'phase_name=' phase_name
+| parse Hashes with * 'SHA1=' hash_sha1 ',' * 'MD5=' hash_md5 ',' * 'SHA256=' hash_sha256 ',' * 'IMPHASH=' hash_imphash
+| project-away EventDetail, rule_name 
+;
+processEvents;
+};
 (union isfuzzy=true
 SysmonEvent1_ProcessCreate,SysmonEvent2_FileCreateTime,SysmonEvent3_NetworkConnect,SysmonEvent4_ServiceStateChange,SysmonEvent5_ProcessTerminate,
 SysmonEvent6_DriverLoad,SysmonEvent7_ImageLoad,SysmonEvent8_CreateRemoteThread,SysmonEvent9_RawAccessRead,SysmonEvent10_ProcessAccess,
 SysmonEvent11_FileCreate,SysmonEvent12_RegistryObjectAddDel,SysmonEvent13_RegistrySetValue,SysmonEvent14_RegistryObjectRename,
 SysmonEvent15_FileCreateStreamHash,SysmonEvent16_ConfigChange,SysmonEvent17_CreateNamedPipe,SysmonEvent18_ConnectNamedPipe,
-SysmonEvent19_WMIEventFilter,SysmonEvent20_WMIEventConsumer,SysmonEvent21_WMIEventConsumerToFilter,SysmonEvent22_DNSEvents)
+SysmonEvent19_WMIEventFilter,SysmonEvent20_WMIEventConsumer,SysmonEvent21_WMIEventConsumerToFilter,SysmonEvent22_DNSEvents,SysmonEvent23_FileDeleteEvents)
