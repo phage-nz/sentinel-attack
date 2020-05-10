@@ -352,9 +352,9 @@
             <Image condition="is">C:\Program Files\Common Files\Microsoft Shared\OfficeSoftwareProtectionPlatform\OSPPSVC.EXE</Image>
             <Image condition="is">C:\Program Files\Microsoft Office\Office16\msoia.exe</Image>
             <Image condition="is">C:\Program Files (x86)\Microsoft Office\root\Office16\officebackgroundtaskhandler.exe</Image>
-            <Image condition="is">C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe</Image>
-            <ParentImage condition="is">C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe</ParentImage>
-            <ParentImage condition="is">C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe</ParentImage>
+            <Image condition="is">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeC2RClient.exe</Image>
+            <ParentImage condition="is">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeClickToRun.exe</ParentImage>
+            <ParentImage condition="is">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeC2RClient.exe</ParentImage>
             <Image condition="is">C:\Program Files\Windows Media Player\wmpnscfg.exe</Image>
             <Image condition="begin with">C:\Program Files\Windows Defender\</Image>
             <Image condition="is">C:\Program Files\Microsoft Security Client\MpCmdRun.exe</Image>
@@ -1005,6 +1005,7 @@
             <TargetObject condition="contains">_Classes\AppX</TargetObject>
             <TargetObject condition="begin with">HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Publishers\</TargetObject>
             <TargetObject condition="is">HKLM\SOFTWARE\Policies\Microsoft\SystemCertificates\Root\Certificates</TargetObject>
+			<TargetObject condition="begin with">HKLM\SOFTWARE\Microsoft\Office\ClickToRun\VREGISTRY_</TargetObject>
             <Image condition="is">C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe</Image>
             <Image condition="begin with">C:\$WINDOWS.~BT\</Image>
             <TargetObject condition="end with">\services\clr_optimization_v2.0.50727_32\Start</TargetObject>
