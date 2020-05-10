@@ -583,10 +583,17 @@
                <Image condition="is not">C:\Windows\System32\cscript.exe</Image>
 			</Rule>
 			<Rule groupRelation="and">
-               <ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">C:\Windows\Temp</ImageLoaded>
-			   <Image condition="is not">C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe</Image>
+               <ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">C:\Windows\Temp\</ImageLoaded>
+			   <Image condition="is not">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeC2RClient.exe</Image>
 			</Rule>
          </ImageLoad>
+      </RuleGroup>
+      <RuleGroup groupRelation="or">
+         <ImageLoad onmatch="exclude">
+		    <Image condition="end with">\AppData\Roaming\Dashlane\Dashlane.exe</Image>
+			<Image condition="end with">\AppData\Local\NVIDIA\NvBackend\ApplicationOntology\NvOAWrapperCache.exe</Image>
+			<Image condition="end with">\AppData\Local\NVIDIA\NvBackend\ApplicationOntology\OAWrapper.exe</Image>
+		 </ImageLoad>
       </RuleGroup>
       <RuleGroup name="" groupRelation="or">
          <CreateRemoteThread onmatch="include">
@@ -768,6 +775,7 @@
             <TargetFilename name="technique_id=T1086,technique_name=PowerShell,phase_name=Execution" condition="begin with">C:\Windows\SysWOW64\WindowsPowerShell</TargetFilename>
             <TargetFilename name="technique_id=T1086,technique_name=PowerShell,phase_name=Execution" condition="end with">.ps1</TargetFilename>
             <TargetFilename name="technique_id=T1086,technique_name=PowerShell,phase_name=Execution" condition="end with">.ps2</TargetFilename>
+			<TargetFilename name="technique_id=T1086,technique_name=PowerShell,phase_name=Execution" condition="end with">.psm</TargetFilename>
             <TargetFilename condition="end with">.py</TargetFilename>
             <TargetFilename condition="end with">.pyc</TargetFilename>
             <TargetFilename condition="end with">.pyw</TargetFilename>
@@ -799,6 +807,7 @@
             <Image condition="is">C:\Windows\System32\smss.exe</Image>
             <Image condition="is">C:\Windows\system32\CompatTelRunner.exe</Image>
             <Image condition="is">C:\Windows\system32\wbem\WMIADAP.EXE</Image>
+			<Image condition="end with">\AppData\Roaming\Dashlane\Dashlane.exe</Image>
             <TargetFilename condition="begin with">C:\Windows\System32\DriverStore\Temp\</TargetFilename>
             <TargetFilename condition="begin with">C:\Windows\System32\wbem\Performance\</TargetFilename>
             <TargetFilename condition="end with">WRITABLE.TST</TargetFilename>
