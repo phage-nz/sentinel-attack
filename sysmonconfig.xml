@@ -355,11 +355,13 @@
             <Image condition="is">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeC2RClient.exe</Image>
             <ParentImage condition="is">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeClickToRun.exe</ParentImage>
             <ParentImage condition="is">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeC2RClient.exe</ParentImage>
+			<Image condition="end with">\AppData\Local\Microsoft\OneDrive\OneDriveStandaloneUpdater.exe</Image>
             <Image condition="is">C:\Program Files\Windows Media Player\wmpnscfg.exe</Image>
             <Image condition="begin with">C:\Program Files\Windows Defender\</Image>
             <Image condition="is">C:\Program Files\Microsoft Security Client\MpCmdRun.exe</Image>
             <CommandLine condition="begin with">"C:\Program Files\Mozilla Firefox\plugin-container.exe" --channel</CommandLine>
             <CommandLine condition="begin with">"C:\Program Files (x86)\Mozilla Firefox\plugin-container.exe" --channel</CommandLine>
+			<ParentImage condition="is">C:\Program Files\Mozilla Firefox\uninstall\helper.exe</ParentImage>
             <Image condition="begin with">C:\Program Files\SplunkUniversalForwarder\bin\</Image>
             <ParentImage condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</ParentImage>
             <ParentImage condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe</ParentImage>
@@ -557,7 +559,8 @@
             <ImageLoaded name="technique_id=T1086,technique_name=PowerShell,phase_name=Execution" condition="end with">system.management.automation.ni.dll</ImageLoaded>
             <ImageLoaded name="technique_id=T1086,technique_name=PowerShell,phase_name=Execution" condition="end with">system.management.automation.dll</ImageLoaded>
             <ImageLoaded name="technique_id=T1053,technique_name=Scheduled Task,phase_name=Execution" condition="end with">taskschd.dll</ImageLoaded>
-            <ImageLoaded name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion" condition="contains any">admin$;c$;\\;\appdata\;\temp\</ImageLoaded>
+			<ImageLoaded name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion" condition="contains any">admin$;c$;\\;\appdata\;\temp\</ImageLoaded>
+			<ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">C:\Windows\Temp\</ImageLoaded>
             <ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">C:\Windows\Media\</ImageLoaded>
             <ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">C:\Windows\addins\</ImageLoaded>
             <ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">C:\Windows\system32\config\systemprofile\</ImageLoaded>
@@ -581,15 +584,12 @@
 			<Rule groupRelation="and">
                <ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">c:\programdata\</ImageLoaded>
                <Image condition="is not">C:\Windows\System32\cscript.exe</Image>
-			</Rule>
-			<Rule groupRelation="and">
-               <ImageLoaded condition="begin with" name="technique_id=T1073,technique_name=DLL Side-Loading,phase_name=Defense Evasion">C:\Windows\Temp\</ImageLoaded>
-			   <Image condition="is not">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeC2RClient.exe</Image>
-			</Rule>
+			</Rule>			
          </ImageLoad>
       </RuleGroup>
       <RuleGroup groupRelation="or">
          <ImageLoad onmatch="exclude">
+		    <Image condition="is">C:\Program Files\Common Files\microsoft shared\ClickToRun\OfficeC2RClient.exe</Image>
 		    <Image condition="end with">\AppData\Roaming\Dashlane\Dashlane.exe</Image>
 			<Image condition="end with">\AppData\Local\NVIDIA\NvBackend\ApplicationOntology\NvOAWrapperCache.exe</Image>
 			<Image condition="end with">\AppData\Local\NVIDIA\NvBackend\ApplicationOntology\OAWrapper.exe</Image>
@@ -804,10 +804,14 @@
             <Image condition="is">C:\Program Files (x86)\Dell\CommandUpdate\InvColPC.exe</Image>
             <Image condition="is">C:\Windows\system32\igfxCUIService.exe</Image>
             <Image condition="is">C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe</Image>
+			<Image condition="end with">\AppData\Local\Microsoft\OneDrive\OneDriveStandaloneUpdater.exe</Image>
+			<Image condition="end with">\AppData\Local\Microsoft\OneDrive\StandaloneUpdater\OneDriveSetup.exe</Image>
             <Image condition="is">C:\Windows\System32\smss.exe</Image>
             <Image condition="is">C:\Windows\system32\CompatTelRunner.exe</Image>
             <Image condition="is">C:\Windows\system32\wbem\WMIADAP.EXE</Image>
 			<Image condition="end with">\AppData\Roaming\Dashlane\Dashlane.exe</Image>
+			<Image condition="end with">\AppData\Local\NVIDIA\NvBackend\ApplicationOntology\NvOAWrapperCache.exe</Image>
+			<Image condition="end with">\AppData\Local\NVIDIA\NvBackend\ApplicationOntology\OAWrapper.exe</Image>
             <TargetFilename condition="begin with">C:\Windows\System32\DriverStore\Temp\</TargetFilename>
             <TargetFilename condition="begin with">C:\Windows\System32\wbem\Performance\</TargetFilename>
             <TargetFilename condition="end with">WRITABLE.TST</TargetFilename>
