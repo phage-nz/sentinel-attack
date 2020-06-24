@@ -243,6 +243,8 @@ dns_query_name = EventDetail.[4].["#text"],dns_query_status = EventDetail.[5].["
 | parse rule_name with * 'technique_id=' technique_id ',' * 'technique_name=' technique_name ',' * 'phase_name=' phase_name
 | project-away EventDetail, rule_name
 ;
+processEvents;
+};
 let SysmonEvent23_FileDeleteEvents=() {
 let processEvents = EventData
 | where EventID == 23
